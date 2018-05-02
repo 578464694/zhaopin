@@ -9,7 +9,14 @@
 namespace backend\controllers;
 
 
-class SearchController
-{
+use yii\web\Controller;
 
+class SearchController extends Controller
+{
+    public $layout = 'white';
+
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
 }
