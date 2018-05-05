@@ -5,7 +5,7 @@
     <div id="bd">
         <div id="main">
             <h1 class="title">
-                <div class="logo large"></div>
+                <span class="logo large"></span>
             </h1>
             <div class="nav ue-clear">
                 <ul class="searchList">
@@ -34,10 +34,10 @@
                 <p class="history mysearch">
                     <label>我的搜索：</label>
                     <span class="all-search">
-                        <a href="javascript:;">专注界面设计网站</a>
-                        <a href="javascript:;">用户体验</a>
-                        <a href="javascript:;">互联网</a>
-                        <a href="javascript:;">资费套餐</a>
+                        <a href="javascript:void(0);">专注界面设计网站</a>
+                        <a href="javascript:void(0);">用户体验</a>
+                        <a href="javascript:void(0);">互联网</a>
+                        <a href="javascript:void(0);">资费套餐</a>
                     </span>
 
                 </p>
@@ -54,7 +54,7 @@
 </body>
 <?php $this->registerJs(<<<JS
 // TODO
-    var suggest_url = "suggest"
+    var suggest_url = "suggest/zhiwei"
     var search_url = "search"
 
 
@@ -85,6 +85,10 @@
                 url:suggest_url+"?s="+searchText+"&s_type="+$(".searchItem.current").attr('data-type'),
                 async: true,
                 success: function(data) {
+                    if(data == null) {
+                        console.log("返回值应为数组")
+                        return;
+                    }
                     for (var i=0;i<data.length;i++){
                         tmpHtml += '<li><a href="'+search_url+'?q='+data[i]+'">'+data[i]+'</a></li>'
                     }

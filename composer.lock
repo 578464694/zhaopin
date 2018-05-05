@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c076e5ec3e248644ac03b5b55abf260",
+    "content-hash": "e66fdfee5bd3dcb1897dea2b2b0bb2c7",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -600,6 +600,55 @@
                 "yii2"
             ],
             "time": "2018-04-26T18:20:00+00:00"
+        },
+        {
+            "name": "yiisoft/yii2-elasticsearch",
+            "version": "2.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-elasticsearch.git",
+                "reference": "ca76f01e93605b2b6dfb7dbaa30cf4070141bf7c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-elasticsearch/ca76f01e93605b2b6dfb7dbaa30cf4070141bf7c.zip",
+                "reference": "ca76f01e93605b2b6dfb7dbaa30cf4070141bf7c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "yiisoft/yii2": "~2.0.14"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\elasticsearch\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc"
+                }
+            ],
+            "description": "Elasticsearch integration and ActiveRecord for the Yii framework",
+            "keywords": [
+                "active-record",
+                "elasticsearch",
+                "fulltext",
+                "search",
+                "yii2"
+            ],
+            "time": "2018-03-27T22:33:22+00:00"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -3353,7 +3402,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "yiisoft/yii2-elasticsearch": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

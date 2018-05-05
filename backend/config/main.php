@@ -10,9 +10,18 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'debug'],
     'defaultRoute' => 'search/index',
-    'modules' => [],
+    'modules' => [
+        'debug' => [
+            'class' => 'yii\debug\Module',
+            'panels' => [
+                'elasticsearch' => [
+                    'class' => 'yii\elasticsearch\DebugPanel',
+                ],
+            ],
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -38,14 +47,18 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
+            'enableStrictParsing' => false,
+        ],
+        'elasticsearch' => [
+            'class' => 'yii\elasticsearch\Connection',
+            'nodes' => [
+                ['http_address' => '127.0.0.1:9200'],
+                // configure more hosts if you have a cluster
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
