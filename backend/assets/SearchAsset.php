@@ -3,6 +3,7 @@
 namespace backend\assets;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 /**
  * Main backend application asset bundle.
@@ -21,9 +22,27 @@ class SearchAsset extends AssetBundle
         JqueryAsset::class
     ];
     public $css = [
-        'search/css/index.css',
         'search/css/style.css',
     ];
 
+    /**
+     * 按需加载样式文件
+     * @param $view View
+     * @param $cssfile
+     */
+    public static function addStyle($view, $cssfile)
+    {
+        $view->registerCssFile($cssfile);
+    }
+
+    /**
+     * 按需加载样式文件
+     * @param $view View
+     * @param $cssfile
+     */
+    public static function addScript($view, $jsfile)
+    {
+        $view->registerJsFile($jsfile);
+    }
 
 }

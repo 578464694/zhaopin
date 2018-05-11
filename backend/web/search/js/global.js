@@ -20,11 +20,12 @@ function hideElement(currentElement, targetElement) {
 				}
 			});
 		}
-		if ($.contains(currentElement[0], $target[0])) {
+		if ($.contains(currentElement, $target[0])) {
 			len = 1;
 		}
 		if (len == 0) {
 			currentElement.hide();
 		}
 	});
+
 };

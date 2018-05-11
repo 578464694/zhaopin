@@ -59,6 +59,14 @@ return [
                 // configure more hosts if you have a cluster
             ],
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,
+                    'js' => []
+                ],
+            ],
+        ]
     ],
     'params' => $params,
 ];

@@ -1,17 +1,15 @@
 <?php
 /* @var $this \yii\web\View */
+\backend\assets\SearchAsset::addStyle($this, '/search/css/index.css');
 ?>
 <div id="container">
     <div id="bd">
         <div id="main">
             <h1 class="title">
-                <span class="logo large"></span>
+                <div class="logo large"></div>
             </h1>
             <div class="nav ue-clear">
                 <ul class="searchList">
-                    <li class="searchItem current" data-type="article">文章</li>
-                    <li class="searchItem" data-type="question">问答</li>
-                    <li class="searchItem" data-type="job">职位</li>
                 </ul>
             </div>
             <div class="inputArea">
@@ -51,11 +49,10 @@
         </div>
     </div>
 </div>
-</body>
 <?php $this->registerJs(<<<JS
 // TODO
-    var suggest_url = "suggest/zhiwei"
-    var search_url = "search"
+    var suggest_url = "search/zhiwei"
+    var search_url = "search/result"
 
 
     $('.searchList').on('click', '.searchItem', function(){
