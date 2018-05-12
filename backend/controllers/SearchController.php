@@ -78,7 +78,7 @@ class SearchController extends Controller
                 'start' => 0,
                 'num' => 5
             ]);
-//                \Yii::$app->response->format = Response::FORMAT_JSON;
+//        \Yii::$app->response->format = Response::FORMAT_JSON;
 
         $begin = microtime(true);
         $result = Job::find()->query([
@@ -95,6 +95,7 @@ class SearchController extends Controller
                     "content" => new \stdClass(),
             ]
         ])->offset(($page-1)*10)->limit(10)->asArray()->search();
+//        return $result;
         $result = $this->getZhiweiService()->search($result);
         $result['search_word'] = $q;
         $result['time'] = round(microtime(true)-$begin,2);

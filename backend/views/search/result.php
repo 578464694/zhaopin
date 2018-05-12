@@ -2,7 +2,7 @@
 /* @var $this \yii\web\View */
 
 use backend\assets\ResultAsset;
-
+use backend\helpers\FormatterHepler;
 ResultAsset::register($this);
 ?>
 <script src="/search/js/jquery.js" type="text/javascript"></script>
@@ -56,24 +56,24 @@ ResultAsset::register($this);
                                 ?>
                                 <a href="<?= $hit['url'] ?>"  target="_blank" class="title"><?php echo $hit['title']?></a>
                                 <span class="divsion">-</span>
-                                <span class="fileType">
-                                    <span class="value"><?= Yii::$app->getFormatter()->asRelativeTime($hit['release_time'])?></span>
-                                </span>
-                                <span class="divsion">-</span>
-                                <span class="fileType">
-                                    <span class="label">来源：</span>
-                                    <span class="value"><?= $hit['website'] ?></span>
-                                </span>
                                 <span class="dependValue">
                                     <span class="label">得分：</span>
                                     <span class="value"><?= $hit['score'] ?></span>
                                 </span>
                             </div>
+                            <div class="itemBody work-year">
+                                <span class="money">
+                                    <?= FormatterHepler::salaryFormat($hit['salary_min'], $hit['salary_max'])?>
+                                </span>
+                                <?= $hit['work_years'].'/'.$hit['degree_need'];?>
+                            </div>
                             <div class="itemBody">
                                 <?php foreach($hit['tags'] as $tag){
                                     echo "<span class='tag'>{$tag}</span>";
                                 }
+
                                 ?>
+
                             </div>
                             <div class="itemBody">
                                 <?= $hit['job_desc'] ?>
@@ -85,7 +85,7 @@ ResultAsset::register($this);
                                 </span>
                                 <span class="info">
                                     <label>发布时间：</label>
-                                    <span class="value"><?= $hit['release_time']?></span>
+                                    <span class="value"><?= Yii::$app->getFormatter()->asRelativeTime($hit['release_time'])?></span>
                                 </span>
                             </div>
                         </div>
@@ -103,13 +103,9 @@ ResultAsset::register($this);
             	<div class="hotSearch">
                 	<h6>热门搜索</h6>
                     <ul class="historyList">
-                        <!--                        {% for search_word in topn_search %}-->
-
                         <?php foreach($top_search as $search):?>
                             <li><a href="/search/result?q=<?=$search?>"><?=$search?></a></li>
                         <?php endforeach;?>
-<!--                        TODO-->
-<!--                        {% endfor %}-->
                     </ul>
                 </div>
                 <div class="mySearch">
@@ -312,6 +308,16 @@ $this->registerCss(<<<CSS
     font-size:12px;
     padding:5px;
     margin-right: 5px;
+}
+
+.money {
+    margin-right: 1em;
+    font-size: 16px;
+    color: #fd5f39;
+}
+
+.work-year{
+    font-size:14px;
 }
 CSS
 );

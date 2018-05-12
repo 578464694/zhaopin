@@ -44,6 +44,10 @@ class ZhiweiService extends \yii\base\Component
             $result[$key]['tags'] = explode(',', $hit['_source']['tags']);
             $result[$key]['url'] = $hit['_source']['url'];
             $result[$key]['release_time'] = $hit['_source']['release_time'];
+            $result[$key]['salary_min'] = $hit['_source']['salary_min'];
+            $result[$key]['salary_max'] = $hit['_source']['salary_max'];
+            $result[$key]['work_years'] = $hit['_source']['work_years'];
+            $result[$key]['degree_need'] = $hit['_source']['degree_need'];
             $result[$key]['score'] = round($hit['_score'],2);
         }
         return $result;
