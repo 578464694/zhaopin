@@ -78,7 +78,7 @@ class SearchController extends Controller
                 'start' => 0,
                 'num' => 5
             ]);
-        //        \Yii::$app->response->format = Response::FORMAT_JSON;
+//                \Yii::$app->response->format = Response::FORMAT_JSON;
 
         $begin = microtime(true);
         $result = Job::find()->query([

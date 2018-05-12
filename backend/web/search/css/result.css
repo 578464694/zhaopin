@@ -64,7 +64,7 @@ html{*overflow:auto;}
 .resultArea .resultList .itemHead a.title{font-size:16px;color:#0080cc;text-decoration:underline;}
 .resultArea .resultList .itemHead .value{color:#008000;}
 .resultArea .resultList .itemHead .divsion{margin:0 5px;}
-.resultArea .resultList .itemHead .fileType{margin-right:10px;}
+.resultArea .resultList .itemHead .fileType{margin-right:3px;}
 
 /*搜索内容主体*/
 .resultArea .resultList .itemBody{margin-bottom:5px;line-height:18px;width:90%;}

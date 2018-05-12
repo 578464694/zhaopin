@@ -57,6 +57,10 @@ ResultAsset::register($this);
                                 <a href="<?= $hit['url'] ?>"  target="_blank" class="title"><?php echo $hit['title']?></a>
                                 <span class="divsion">-</span>
                                 <span class="fileType">
+                                    <span class="value"><?= Yii::$app->getFormatter()->asRelativeTime($hit['release_time'])?></span>
+                                </span>
+                                <span class="divsion">-</span>
+                                <span class="fileType">
                                     <span class="label">来源：</span>
                                     <span class="value"><?= $hit['website'] ?></span>
                                 </span>
