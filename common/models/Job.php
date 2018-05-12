@@ -22,7 +22,7 @@ class Job extends ActiveRecord
     public function attributes()
     {
         // path mapping for '_id' is setup to field 'id'
-        return ['addr', 'city', 'company_name', 'company_url',
+        return ['_id', 'addr', 'city', 'company_name', 'company_url',
             'degree_need', 'job_advantage', 'job_desc', 'job_type',
             'publish_time', 'release_time', 'salary_max', 'salary_min', 'tags', 'title',
             'url', 'url_object_id', 'website', 'work_years', 'suggest'];
@@ -109,5 +109,18 @@ class Job extends ActiveRecord
         $db = static::getDb();
         $command = $db->createCommand();
         $command->deleteIndex(static::index());
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'addr' => '地址',
+            'city' => '城市',
+            'company_name' => '公司',
+            'degree_need' => '学历',
+            'job_advantage' => '职位诱惑',
+            'job_desc' => '职位描述',
+            'title' => '名称',
+        ];
     }
 }

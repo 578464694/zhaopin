@@ -8,9 +8,25 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+    'language' => 'zh-CN',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'job' => [
+            'class' => 'frontend\modules\job\Module',
+            'as access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ],
+
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -33,17 +49,22 @@ return [
                 ],
             ],
         ],
+        'elasticsearch' => [
+            'class' => 'yii\elasticsearch\Connection',
+            'nodes' => [
+                ['http_address' => '192.168.1.108:9200'],
+                // configure more hosts if you have a cluster
+            ],
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
