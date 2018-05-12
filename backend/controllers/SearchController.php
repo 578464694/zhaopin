@@ -9,6 +9,7 @@
 namespace backend\controllers;
 
 
+use backend\helpers\Redis;
 use backend\models\forms\SuggestForm;
 use backend\models\Job;
 use backend\services\ZhiweiService;
@@ -60,7 +61,6 @@ class SearchController extends Controller
     /**
      * 搜索结果
      * @param $q
-     * @param $p
      * @return string
      */
     public function actionResult($q)
@@ -71,8 +71,16 @@ class SearchController extends Controller
         }catch (Exception $e) {
             $page = 1;
         }
+        Redis::getRedis()->zIncrBy("search_key_words",1, $q);
+        $top_search = Redis::getRedis()->zRevRangeByScore("search_key_words",
+            "+inf", "-inf",
+            [
+                'start' => 0,
+                'num' => 5
+            ]);
         //        \Yii::$app->response->format = Response::FORMAT_JSON;
-        $begin = microtime();
+
+        $begin = microtime(true);
         $result = Job::find()->query([
             "multi_match" => [
                 "query" => $q,
@@ -89,10 +97,13 @@ class SearchController extends Controller
         ])->offset(($page-1)*10)->limit(10)->asArray()->search();
         $result = $this->getZhiweiService()->search($result);
         $result['search_word'] = $q;
-        $result['time'] = microtime()-$begin;
+        $result['time'] = round(microtime(true)-$begin,2);
         $result['page'] = $page;
         return $this->render('result',[
-            'allHits' => $result
+            'allHits' => $result,
+            'lagou' => Redis::getRedis()->get('lagou_count'),
+            'yingcai' => Redis::getRedis()->get('yingcai_count'),
+            'top_search' => $top_search
         ]);
     }
 

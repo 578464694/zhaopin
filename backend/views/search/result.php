@@ -13,6 +13,8 @@ ResultAsset::register($this);
         <div class="inputArea">
         	<input type="text" class="searchInput" value="<?= $allHits['search_word'] ?>"/>
             <input type="button" class="searchButton" onclick="add_search()"/>
+            <ul class="dataList">
+            </ul>
         </div>
     </div>
     <div class="nav">
@@ -26,23 +28,13 @@ ResultAsset::register($this);
 
                 <div class="subfield">网站</div>
                 <ul class="subfieldContext">
-                	<li>
-                    	<span class="name">伯乐在线</span>
-						<span class="unit">({{ jobbole_count }})</span>
-                    </li>
-                    <li>
-                    	<span class="name">知乎</span>
-						<span class="unit">(9862)</span>
-                    </li>
                     <li>
                     	<span class="name">拉勾网</span>
-						<span class="unit">(9862)</span>
+						<span class="unit">(<?= $lagou ?>)</span>
                     </li>
-                    <li class="more">
-                    	<a href="javascript:;">
-                        	<span class="text">更多</span>
-                        	<i class="moreIcon"></i>
-                        </a>
+                    <li>
+                    	<span class="name">中华英才网</span>
+						<span class="unit">(<?= $yingcai ?>)</span>
                     </li>
                 </ul>
 
@@ -101,8 +93,11 @@ ResultAsset::register($this);
             	<div class="hotSearch">
                 	<h6>热门搜索</h6>
                     <ul class="historyList">
-<!--                        {% for search_word in topn_search %}-->
-                            <li><a href="/search/result?q=test">test</a></li>
+                        <!--                        {% for search_word in topn_search %}-->
+
+                        <?php foreach($top_search as $search):?>
+                            <li><a href="/search/result?q=<?=$search?>"><?=$search?></a></li>
+                        <?php endforeach;?>
 <!--                        TODO-->
 <!--                        {% endfor %}-->
                     </ul>
@@ -123,6 +118,7 @@ ResultAsset::register($this);
 <script src="/search/js/pagination.js" type="text/javascript"></script>
 <script type="text/javascript">
     var search_url = "/search/result"
+    var suggest_url = "/search/zhiwei"
 
     $('.searchList').on('click', '.searchItem', function(){
         $('.searchList .searchItem').removeClass('current');
@@ -176,7 +172,6 @@ ResultAsset::register($this);
             display_msg :true,
             callback :pageselectCallback
     });
-    console.log(<?= $allHits['page']-1?>)
     function pageselectCallback(page_id, jq) {
         window.location.href=search_url+'?q='+key_words+'&p='+(page_id+1)
     }
@@ -191,8 +186,6 @@ ResultAsset::register($this);
             $('#container').height($(window).height()-33);
         }
     }
-</script>
-<script type="text/javascript">
     $('.searchList').on('click', '.searchItem', function(){
         $('.searchList .searchItem').removeClass('current');
         $(this).addClass('current');
@@ -202,6 +195,36 @@ ResultAsset::register($this);
     $('.searchInput').on('focus', function(){
         $('.dataList').show()
     });
+
+    // 搜索建议
+    $('.searchInput').bind(' input propertychange ',function(){
+        var searchText = $(this).val();
+        console.log(searchText)
+        var tmpHtml = ""
+        $.ajax({
+            cache: false,
+            type: 'get',
+            dataType:'json',
+            url:suggest_url+"?s="+searchText+"&s_type="+$(".searchItem.current").attr('data-type'),
+            async: true,
+            success: function(data) {
+                if(data == null) {
+                    console.log("返回值应为数组")
+                    return;
+                }
+                for (var i=0;i<data.length;i++){
+                    tmpHtml += '<li><a href="'+search_url+'?q='+data[i]+'">'+data[i]+'</a></li>'
+                }
+                $(".dataList").html("")
+                $(".dataList").append(tmpHtml);
+                if (data.length == 0){
+                    $('.dataList').hide()
+                }else {
+                    $('.dataList').show()
+                }
+            }
+        });
+    } );
 
     // 联想下拉点击
     $('.dataList').on('click', 'li', function(){

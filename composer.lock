@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e66fdfee5bd3dcb1897dea2b2b0bb2c7",
+    "content-hash": "f823af5816c47a6979bdb39de12d515e",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -327,6 +327,61 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
+        },
+        {
+            "name": "predis/predis",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "d72f0678bade78af953605622760fe262d82eb58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/nrk/predis/d72f0678bade78af953605622760fe262d82eb58.zip",
+                "reference": "d72f0678bade78af953605622760fe262d82eb58",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2017-07-12T14:44:10+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3403,7 +3458,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "yiisoft/yii2-elasticsearch": 20
+        "yiisoft/yii2-elasticsearch": 20,
+        "predis/predis": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

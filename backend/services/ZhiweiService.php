@@ -42,7 +42,7 @@ class ZhiweiService extends \yii\base\Component
             $result[$key]['release_time'] = $hit['_source']['release_time'];
             $result[$key]['website'] = $hit['_source']['website'];
             $result[$key]['url'] = $hit['_source']['url'];
-            $result[$key]['score'] = $hit['_score'];
+            $result[$key]['score'] = round($hit['_score'],2);
         }
         return $result;
     }
