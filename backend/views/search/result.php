@@ -70,6 +70,12 @@ ResultAsset::register($this);
                                 </span>
                             </div>
                             <div class="itemBody">
+                                <?php foreach($hit['tags'] as $tag){
+                                    echo "<span class='tag'>{$tag}</span>";
+                                }
+                                ?>
+                            </div>
+                            <div class="itemBody">
                                 <?= $hit['job_desc'] ?>
                             </div>
                             <div class="itemFoot">
@@ -296,3 +302,17 @@ ResultAsset::register($this);
         }
     }
 </script>
+
+<?php
+$this->registerCss(<<<CSS
+.tag {
+    border: 1px solid #dcdcdc;
+    border-radius: 3px;
+    color: #555;
+    font-size:12px;
+    padding:5px;
+    margin-right: 5px;
+}
+CSS
+);
+?>
