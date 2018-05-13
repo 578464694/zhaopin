@@ -59,7 +59,17 @@ class JobSearch extends Job
         }
 
         // grid filtering conditions
-
+//        $query->
+//            ->andFilterWhere(['like', 'title', $this->title]);
+            if(! empty($this->title)) {
+                $query->query([
+                    "multi_match" => [
+                        "query" => $this->title,
+                        "fields" => ['title']
+                    ],
+    
+                ]);
+            }
         return $dataProvider;
     }
 }

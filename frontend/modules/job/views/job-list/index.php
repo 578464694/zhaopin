@@ -18,9 +18,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-
-            'addr',
+            'title',
             'city',
+            [
+                'label' => '薪资',
+                'value' => function($model) {
+                    return $model->salary_min."-".$model->salary_max;
+                }
+            ],
             'company_name',
             'degree_need',
             //'job_advantage',
@@ -31,14 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
             //'salary_max',
             //'salary_min',
             //'tags',
-            //'title',
+            //
             //'url',
             //'url_object_id',
             //'website',
             //'work_years',
             //'suggest',
 
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 </div>
