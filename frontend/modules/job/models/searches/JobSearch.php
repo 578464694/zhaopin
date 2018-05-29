@@ -67,7 +67,7 @@ class JobSearch extends Job
                         "query" => $this->title,
                         "fields" => ['title']
                     ],
-    
+
                 ]);
             }
         return $dataProvider;

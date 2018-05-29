@@ -106,6 +106,53 @@ JS
 );
 ?>
 
+<script type="text/javascript">
+    function add_search(){
+        var val = $(".searchInput").val();
+        if (val.length>=2){
+            //点击搜索按钮时，去重
+            KillRepeat(val);
+            //去重后把数组存储到浏览器localStorage
+            localStorage.search = searchArr;
+            //然后再把搜索内容显示出来
+            MapSearchArr();
+        }
+
+        window.location.href=search_url+'?q='+val+"&s_type="+$(".searchItem.current").attr('data-type')
+
+    }
+
+    //去重
+    function KillRepeat(val){
+        var kill = 0;
+        for (var i=0;i<searchArr.length;i++){
+            if(val===searchArr[i]){
+                kill ++;
+            }
+        }
+        if(kill<1){
+            searchArr.unshift(val);
+        }else {
+            removeByValue(searchArr, val)
+            searchArr.unshift(val)
+        }
+    }
+
+    function MapSearchArr(){
+        var tmpHtml = "";
+        var arrLen = 0
+        if (searchArr.length >= 5){
+            arrLen = 5
+        }else {
+            arrLen = searchArr.length
+        }
+        for (var i=0;i<arrLen;i++){
+            tmpHtml += '<a href="'+search_url+'?q='+searchArr[i]+'">'+searchArr[i]+'</a>'
+        }
+        $(".mysearch .all-search").html(tmpHtml);
+    }
+</script>
+
 <?php $this->registerJs(<<<JS
     var searchArr;
     //定义一个search的，判断浏览器有无数据存储（搜索历史）
