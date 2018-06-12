@@ -278,7 +278,7 @@ ResultAsset::register($this);
             arrLen = searchArr.length
         }
         for (var i=0;i<arrLen;i++){
-            tmpHtml += '<li><a href="/search/result?q='+searchArr[i]+'">'+searchArr[i]+'</a></li>'
+            tmpHtml += '<li><a href="/search?q='+searchArr[i]+'">'+searchArr[i]+'</a></li>'
         }
         $(".mySearch .historyList").append(tmpHtml);
     }

@@ -1,7 +1,6 @@
 <?php
 /* @var $this \yii\web\View */
 \backend\assets\SearchAsset::addStyle($this, '/search/css/index.css');
-//\backend\assets\SearchAsset::register($this);
 ?>
 <div id="container">
     <div id="bd">
@@ -27,6 +26,7 @@
 
             <div class="historyArea">
                 <p class="history">
+                    <label>热门搜索：</label>
 
                 </p>
                 <p class="history mysearch">
@@ -49,44 +49,16 @@
         </div>
     </div>
 </div>
-<script src="http://backend.zhaopin2.com/assets/17957773/jquery.js"></script>
-<script type="text/javascript">
-    function hideElement(currentElement, targetElement) {
-        if (!$.isArray(targetElement)) {
-            targetElement = [ targetElement ];
-        }
-        $(document).on("click.hideElement", function(e) {
-            var len = 0, $target = $(e.target);
-            for (var i = 0, length = targetElement.length; i < length; i++) {
-                $.each(targetElement[i], function(j, n) {
-                    if ($target.is($(n)) || $.contains($(n)[0], $target[0])) {
-                        len++;
-                    }
-                });
-            }
-            if ($.contains(currentElement, $target[0])) {
-                len = 1;
-            }
-            if (len == 0) {
-                currentElement.hide();
-            }
-        });
-
-    };
-</script>
-<script type="text/javascript">
+<?php $this->registerJs(<<<JS
 // TODO
     var suggest_url = "search/zhiwei"
     var search_url = "search/result"
 
-    $(document).ready(function () {
-        $('.searchList').on('click', '.searchItem', function(){
-            $('.searchList .searchItem').removeClass('current');
-            $(this).addClass('current');
-        });
-    })
 
-
+    $('.searchList').on('click', '.searchItem', function(){
+        $('.searchList .searchItem').removeClass('current');
+        $(this).addClass('current');
+    });
 
     function removeByValue(arr, val) {
         for(var i=0; i<arr.length; i++) {
@@ -130,7 +102,9 @@
     })
 
     hideElement($('.dataList'), $('.searchInput'));
-</script>
+JS
+);
+?>
 
 <script type="text/javascript">
     function add_search(){
@@ -179,7 +153,7 @@
     }
 </script>
 
-<script type="text/javascript">
+<?php $this->registerJs(<<<JS
     var searchArr;
     //定义一个search的，判断浏览器有无数据存储（搜索历史）
     if(localStorage.search){
@@ -235,4 +209,7 @@
             searchArr.unshift(val)
         }
     }
-</script>
+JS
+);
+?>
+

@@ -11,6 +11,11 @@ namespace common\models;
 
 use yii\elasticsearch\ActiveRecord;
 
+/**
+ * Job model
+ * @property string $url
+ * @package common\models
+ */
 class Job extends ActiveRecord
 {
     // Other class attributes and methods go here
@@ -22,7 +27,7 @@ class Job extends ActiveRecord
     public function attributes()
     {
         // path mapping for '_id' is setup to field 'id'
-        return ['_id', 'addr', 'city', 'company_name', 'company_url',
+        return ['_id', 'addr', 'city', 'company_name', 'company_short_name', 'company_url', 'company_img',
             'degree_need', 'job_advantage', 'job_desc', 'job_type',
             'publish_time', 'release_time', 'salary_max', 'salary_min', 'tags', 'title',
             'url', 'url_object_id', 'website', 'work_years', 'suggest'];
@@ -50,7 +55,9 @@ class Job extends ActiveRecord
                     'addr'          => ['type' => 'text', "analyzer" => "ik_max_word"],
                     'city'          => ['type' => 'keyword'],
                     'company_name'  => ['type' => 'text', "analyzer" => "ik_max_word"],
+                    'company_short_name'  => ['type' => 'text', "analyzer" => "ik_smart"],
                     'company_url'   => ['type' => 'keyword'],
+                    'company_img'   => ['type' => 'keyword'],
                     'degree_need'   => ['type' => 'keyword'],
                     'job_advantage' => ['type' => 'text', "analyzer" => "ik_max_word"],
                     'job_desc'      => ['type' => 'text', "analyzer" => "ik_max_word"],
